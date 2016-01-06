@@ -1,0 +1,28 @@
+base theme = unl_fourone
+
+name = UNLedu 4.1 OG
+description = Subtheme of Organic Groups modifications for the base UNLedu 4.1 theme.
+screenshot = screenshot.png
+core = 7.x
+engine = phptemplate
+
+; File name must not be 'style.css' to inherit from unl_fourone (even if in subdir)
+stylesheets[all][] = css/styles.css
+
+; Must copy unl regions over, they do not inherit
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+
+regions[navlinks] = Navigation links
+regions[content_top] = Content top
+regions[sidebar_first] = Sidebar first
+regions[content] = Content
+regions[sidebar_second] = Sidebar second
+regions[content_bottom] = Content bottom
+
+regions[optionalfooter] = Optional footer
+regions[contactinfo] = Contact info (Main)
+regions[contactinfo_additional] = Contact info (Additional)
+regions[socialmedia] = Social media
+regions[leftcollinks] = Related links
+
