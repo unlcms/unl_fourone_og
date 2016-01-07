@@ -13,6 +13,18 @@ function unl_fourone_og_preprocess_page(&$vars, $hook) {
       $vars['site_name'] = $group->title;
     }
   }
+
+  // Clear the site_slogan for the main group
+  if (unl_fourone_og_get_current_group() === false) {
+    $vars['site_slogan'] = '';
+  }
+  $group = unl_fourone_og_get_current_group();
+  if ($group) {
+    $front_nid = unl_fourone_og_get_front_group_id();
+    if ($group->nid == $front_nid) {
+      $vars['site_slogan'] = '';
+    }
+  }
 }
 
 /**
