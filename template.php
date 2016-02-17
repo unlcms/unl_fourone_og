@@ -146,8 +146,9 @@ function unl_fourone_og_breadcrumb($variables) {
       }
     }
 
-    $variables['breadcrumb'][] = (isset($group_alias) ? '<a href="'.$group_alias.'">' : '') . check_plain(menu_get_active_title()) . (isset($group_alias) ? '</a>' : '');
-  }
+    $variables['breadcrumb'][] = (isset($group_alias) ? '<a href="'.$group_alias.'">' : '') .
+        (isset($group_name) ? $group_name : check_plain(menu_get_active_title())) .
+        (isset($group_alias) ? '</a>' : '');  }
 
   $html = '<ul>' . PHP_EOL;
   foreach ($variables['breadcrumb'] as $breadcrumb) {
