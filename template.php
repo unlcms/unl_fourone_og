@@ -110,6 +110,11 @@ function unl_fourone_og_breadcrumb($variables) {
     $node = menu_get_object();
     if ($group->nid !== unl_fourone_og_get_front_group_id() && isset($node) && $node->type == 'group') {
       array_pop($variables['breadcrumb']);
+      // At this point, on a group homepage the breadcrumb trail should consist of one item: Home
+      // This is sort of a hack below for cases where the group homepage is somewhere in a menu and an extra breadcrumb is being added.
+      if (count($variables['breadcrumb']) == 2) {
+        array_pop($variables['breadcrumb']);
+      }
     }
   }
 
