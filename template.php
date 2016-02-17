@@ -119,8 +119,19 @@ function unl_fourone_og_breadcrumb($variables) {
   else {
     // Change 'Home' to be $site_name
     array_unshift($variables['breadcrumb'],
-      str_replace('Home', check_plain(unl_fourone_get_site_name_abbreviated()),
-        array_shift($variables['breadcrumb'])));
+        str_replace('Home', check_plain(unl_fourone_get_site_name_abbreviated()),
+            array_shift($variables['breadcrumb'])));
+  }
+
+  //Add the intermediate breadcrumbs if they exist
+  $intermediateBreadcrumbs = theme_get_setting('intermediate_breadcrumbs');
+  if (is_array($intermediateBreadcrumbs)) {
+    krsort($intermediateBreadcrumbs);
+    foreach ($intermediateBreadcrumbs as $intermediateBreadcrumb) {
+      if ($intermediateBreadcrumb['text'] && $intermediateBreadcrumb['href']) {
+        array_unshift($variables['breadcrumb'], '<a href="' . $intermediateBreadcrumb['href'] . '">' . check_plain($intermediateBreadcrumb['text']) . '</a>');
+      }
+    }
   }
 
   // Prepend UNL
@@ -128,7 +139,14 @@ function unl_fourone_og_breadcrumb($variables) {
 
   // Append title of current page -- http://drupal.org/node/133242
   if (!drupal_is_front_page()) {
-    $variables['breadcrumb'][] = drupal_get_title();
+    if ($group = unl_fourone_og_get_current_group()) {
+      $node = menu_get_object();
+      if ($group->nid !== unl_fourone_og_get_front_group_id() && isset($node) && $node->type == 'group') {
+        $group_alias = drupal_get_path_alias('node/'.$node->nid);
+      }
+    }
+
+    $variables['breadcrumb'][] = (isset($group_alias) ? '<a href="'.$group_alias.'">' : '') . check_plain(menu_get_active_title()) . (isset($group_alias) ? '</a>' : '');
   }
 
   $html = '<ul>' . PHP_EOL;
