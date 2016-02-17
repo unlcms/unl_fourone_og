@@ -143,12 +143,14 @@ function unl_fourone_og_breadcrumb($variables) {
       $node = menu_get_object();
       if ($group->nid !== unl_fourone_og_get_front_group_id() && isset($node) && $node->type == 'group') {
         $group_alias = drupal_get_path_alias('node/'.$node->nid);
+        $group_name = $node->title;
       }
     }
 
     $variables['breadcrumb'][] = (isset($group_alias) ? '<a href="'.$group_alias.'">' : '') .
         (isset($group_name) ? $group_name : check_plain(menu_get_active_title())) .
-        (isset($group_alias) ? '</a>' : '');  }
+        (isset($group_alias) ? '</a>' : '');
+  }
 
   $html = '<ul>' . PHP_EOL;
   foreach ($variables['breadcrumb'] as $breadcrumb) {
