@@ -140,7 +140,7 @@ function unl_fourone_og_breadcrumb($variables) {
   }
 
   // Prepend UNL
-  array_unshift($variables['breadcrumb'], '<a href="http://www.unl.edu/">UNL</a>');
+  array_unshift($variables['breadcrumb'], '<a href="http://www.unl.edu/">Nebraska</a>');
 
   // Append title of current page -- http://drupal.org/node/133242
   if (!drupal_is_front_page()) {
