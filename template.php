@@ -71,34 +71,8 @@ function unl_fourone_og_menu_breadcrumb_alter(&$active_trail, $item) {
         'localized_options' => array(),
         'type' => 0,
       );
+      array_splice($active_trail, 1, 0, array($group_breadcrumb));
     }
-  }
-  else {
-    // No group was found, use the default breadcrumbs.
-    $base_path = theme_get_setting('unl_fourone_og_base_path', 'unl_fourone_og');
-    $title = '';
-
-    // Get the title and path to use.
-    if (empty($base_path)) {
-      $title = variable_get('site_name', 'Unknown Site name');
-    }
-    else {
-      $path = drupal_lookup_path("source", $base_path);
-      $node = menu_get_object("node", 1, $path);
-      $title = $node->title;
-    }
-
-    $group_breadcrumb = array(
-      'title' => $title,
-      'href'  => $base_path,
-      'link_path' => '',
-      'localized_options' => array(),
-      'type' => 0,
-    );
-  }
-
-  if (isset($group_breadcrumb)) {
-    array_splice($active_trail, 1, 0, array($group_breadcrumb));
   }
 }
 
